@@ -50,8 +50,9 @@ ex: ./osslab-SA -p 0xf0f0 -r test.bin -k 0
 
 Of course, you can do ./osslab-SA -p 0xf0f0 -r test.bin -s 720 -d 6 -t 64 -k 0
 
+前言此
 此程式主要針對 WD 250GB HAWK 家族的硬碟 (e.g. WD2500KS-??MJ??, WD2500KS-??MK? .....)
-主要使用沒有被宣告的保留區域, 並使用磁頭2~磁頭5來讀寫資料。
+主要使用沒有被宣告的保留區域,並使用磁頭2~磁頭5來讀寫資料,再經過全盤寫0,保留區資料還是在的,(磁頭1~2為硬體工作軔體區請勿動到)。
 
 請使用 “lspci -v”指令來找到你的SATA IO位置, 如下所示
 
@@ -66,7 +67,7 @@ I/O ports at f000 [size=16]
 Capabilities: [70] Power Management version 2
 Kernel driver in use: ata_piix
 
-請自行測試出印碟的Port位置
+請自行測試出硬碟的Port位置
 編譯：gcc -Wall -O -g -o osslab-SA osslab-SA.c
 讀取硬碟的ID資訊：osslab-SA -p 0xport 
 寫資料到硬碟保留區：osslab-SA -p 0xport -w filename
